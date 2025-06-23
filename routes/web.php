@@ -4,6 +4,8 @@ use App\Livewire\Settings\Appearance;
 use App\Livewire\Settings\Password;
 use App\Livewire\Settings\Profile;
 use Illuminate\Support\Facades\Route;
+use App\Livewire\Admin\Dashboard;
+use App\Livewire\Admin\Products;
 
 Route::get('/', function () {
     return view('welcome');
@@ -12,9 +14,13 @@ Route::get('/', function () {
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
-Route::view('admin/dashboard', 'admin.dashboard')
-    ->middleware(['auth', 'verified'])
-    ->name('admin.dashboard');
+
+Route::middleware(['auth', 'verified', 'admin'])->group(function () {
+    Route::get('/admin/dashboard', Dashboard::class)->name('admin.dashboard');
+    Route::get('/admin/products', Products::class)->name('admin.products');
+    
+});
+
 
 Route::middleware(['auth'])->group(function () {
     Route::redirect('settings', 'settings/profile');

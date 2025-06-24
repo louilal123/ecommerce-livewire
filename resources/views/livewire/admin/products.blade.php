@@ -1,6 +1,6 @@
-<div class="space-y-6">
+<div class="space-y-4">
     @if (session('success'))
-        <div class="bg-green-500 text-white px-4 py-3 rounded flex items-center justify-between">
+        <div class="bg-green-500 text-white px-4 py-2 rounded flex items-center justify-between">
             <div class="flex items-center gap-2">
                 <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
                     <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
@@ -12,14 +12,16 @@
     @endif
 
     <div class="flex items-center justify-between">
-        <h1 class="text-2xl font-semibold tracking-tight">Products</h1>
-        <div class="flex justify-end mb-4">
+       <flux:heading size="xl" level="1">Manage Products </flux:heading>
+        <div class="flex justify-end mb-1">
             <flux:modal.trigger name="create-product">
-                <flux:button  class="mt-4 justify-content-end bg-blue-700">Create Product</flux:button>
+                <flux:button  class="mt-1">Create Product</flux:button>
             </flux:modal.trigger>
         </div>
     </div>
-
+    <div>
+          <flux:input placeholder="Search" class="max-w-xs" wire:model.live="search"/>
+    </div>
     <div class="overflow-hidden bg-white border rounded-lg shadow dark:bg-zinc-900 dark:border-zinc-700">
         <table class="min-w-full divide-y divide-zinc-200 dark:divide-zinc-700">
             <thead class="bg-zinc-50 dark:bg-zinc-800">
@@ -132,7 +134,7 @@
         </table>
     </div>
 
-    <div class="mt-4">
+    <div class="mt-1">
         {{ $products->links() }}
     </div>
     
@@ -152,10 +154,10 @@
                 </div>
 
                 <div class="space-y-4">
-                    <flux:input label="Product Name" wire:model.defer="name" required />
+                    <flux:input label="Product Name" wire:model.defer="name"  />
                     <flux:textarea label="Description" wire:model.defer="description" rows="3" />
-                    <flux:input label="Price" type="number" step="0.01" wire:model.defer="price" required />
-                    <flux:input label="Stock Quantity" type="number" min="0" wire:model.defer="stock" required />
+                    <flux:input label="Price" type="number" step="0.01" wire:model.defer="price"  />
+                    <flux:input label="Stock Quantity" type="number" min="0" wire:model.defer="stock"  />
                     <flux:input label="Image" type="file" wire:model="image" accept="image/*" />
                 </div>
 
@@ -181,10 +183,10 @@
                 </div>
 
                 <div class="space-y-4">
-                    <flux:input label="Product Name" wire:model.defer="name" required />
+                    <flux:input label="Product Name" wire:model.defer="name"  />
                     <flux:textarea label="Description" wire:model.defer="description" rows="3" />
-                    <flux:input label="Price" type="number" step="0.01" wire:model.defer="price" required />
-                    <flux:input label="Stock Quantity" type="number" min="0" wire:model.defer="stock" required />
+                    <flux:input label="Price" type="number" step="0.01" wire:model.defer="price"  />
+                    <flux:input label="Stock Quantity" type="number" min="0" wire:model.defer="stock"  />
                     <flux:input label="Image" type="file" wire:model="image" accept="image/*" />
 
                     @if ($image)

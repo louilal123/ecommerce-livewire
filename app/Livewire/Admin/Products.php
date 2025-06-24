@@ -8,6 +8,8 @@ use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 
+use Livewire\Attributes\Url;
+
 class Products extends Component
 {
     use WithFileUploads;
@@ -28,6 +30,8 @@ class Products extends Component
     public $productId;
     public $newImage;
     public $currentImageUrl;
+               
+    public string $search ='';
     
    protected function rules()
     {
@@ -42,7 +46,7 @@ class Products extends Component
     } 
     public function mount()
     {
-        $this->resetPage();
+        $this->resetPage(); 
     }
    public function resetForm()
     {
@@ -165,7 +169,16 @@ class Products extends Component
     
     public function render()
     {
-        $products = Product::latest()->paginate(10);
+        $products = Product::query()
+        ->when($this->search, function ($query) {
+            $term = '%' . $this->search . '%';
+            $query->where('name', 'like', $term)
+                ->orWhere('description', 'like', $term);
+        })
+        ->latest()
+        ->paginate(8);
+
+
         return view('livewire.admin.products', compact('products'));
     }
 }

@@ -1,30 +1,22 @@
 <?php
-
 namespace App\Livewire\Admin;
 
-use App\Enums\UserRole;
-use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
+use App\Models\Product;
+use App\Models\Order;
+use App\Models\User;
+use Livewire\Attributes\Layout;
 
+#[Layout('components.layouts.admin')]
 class Dashboard extends Component
 {
-    public string $layout;
-
-    public function mount(): void
-    {
-        $user = Auth::user();
-
-        $this->layout = match (true) {
-            !$user => 'layouts.app.header',
-            $user->role === UserRole::Admin => 'layouts.app.sidebar',
-            default => 'layouts.app.header',
-        };
-    }
-
     public function render()
     {
         return view('livewire.admin.dashboard', [
-            'layout' => $this->layout
+            'productCount' => Product::count(),
+            'orderCount' => Order::where('status', 'paid')->count(),
+            'salesTotal' => Order::where('status', 'paid')->sum('total'),
+            'userCount' => User::where('role', 'user')->count(),
         ]);
     }
 }

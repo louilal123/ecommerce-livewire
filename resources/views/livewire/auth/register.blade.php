@@ -1,4 +1,5 @@
-<div class="flex flex-col gap-6">
+<section class="w-full max-w-md px-4 sm:px-6 mx-auto mt-12 sm:mt-16 mb-24 sm:mb-32">
+    <div class="flex flex-col gap-6">
     <x-auth-header :title="__('Create an account')" :description="__('Enter your details below to create your account')" />
 
     <!-- Session Status -->
@@ -59,4 +60,11 @@
         {{ __('Already have an account?') }}
         <flux:link :href="route('login')" wire:navigate>{{ __('Log in') }}</flux:link>
     </div>
+    
+     <flux:separator text="or" /> 
+
+      <div class="mt-2">
+            <x-google-button />
+        </div>
 </div>
+</section>

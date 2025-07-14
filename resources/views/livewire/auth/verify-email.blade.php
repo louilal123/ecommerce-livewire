@@ -1,4 +1,6 @@
-<div class="mt-4 flex flex-col gap-6">
+<section class="w-full max-w-md px-4 sm:px-6 mx-auto mt-12 sm:mt-16 mb-24 sm:mb-32">
+ 
+    <div class="mt-4 flex flex-col gap-6">
     <flux:text class="text-center">
         {{ __('Please verify your email address by clicking on the link we just emailed to you.') }}
     </flux:text>
@@ -19,3 +21,4 @@
         </flux:link>
     </div>
 </div>
+</section>

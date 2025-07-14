@@ -12,7 +12,10 @@ use Livewire\Attributes\Layout;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 use App\Enums\UserRole;
+use App\Helpers\Flash;
+use SweetAlert2\Laravel\Swal;
 
+     
 #[Layout('components.layouts.auth')]
 class Login extends Component
 {
@@ -43,12 +46,29 @@ class Login extends Component
 
         RateLimiter::clear($this->throttleKey());
         Session::regenerate();
-
-        if(auth()->user()->role ===UserRole::Admin){
-            return redirect()->route("admin.dashboard")->with("success", "Logged in sucessfully");
+        
+        if (auth()->user()->role === UserRole::Admin) {
+        Swal::fire([
+            'title' => 'Login successfully!',
+            'icon' => 'success',
+            'toast' => true,
+            'position' => 'top-end',
+            'showConfirmButton' => false,
+            'timer' => 3000,
+        ]);
+            return $this->redirectRoute('admin.dashboard', navigate: true);
+            
         }
-
-        $this->redirectIntended(default: route('dashboard', absolute: false), navigate: true);
+        Swal::fire([
+            'title' => 'Login successfully!',
+            'icon' => 'success',
+            'toast' => true,
+            'position' => 'top-end',
+            'showConfirmButton' => false,
+            'timer' => 3000,
+        ]);
+        $this->redirectIntended(default: route('home', absolute: false), navigate: true);
+        
     }
 
     /**

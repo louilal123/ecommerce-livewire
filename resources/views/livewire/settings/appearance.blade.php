@@ -1,4 +1,4 @@
-<section class="w-full">
+<section class="dark:bg-zinc-800 max-w-7xl mx-auto lg:px-4">
     @include('partials.settings-heading')
 
     <x-settings.layout :heading="__('Appearance')" :subheading=" __('Update the appearance settings for your account')">

@@ -52,7 +52,7 @@
 }
 
 [data-flux-label] {
-    @apply  !mb-0 !leading-tight;
+    @apply !mb-0 !leading-tight;
 }
 
 input:focus[data-flux-control],
@@ -60,6 +60,19 @@ textarea:focus[data-flux-control],
 select:focus[data-flux-control] {
     @apply outline-hidden ring-2 ring-accent ring-offset-2 ring-offset-accent-foreground;
 }
+
+a[data-current] {
+    background-color: var(--color-indigo-500);
+    color: white;
+}
+
+.dark a[data-current] {
+    background-color: var(--color-indigo-500);
+    color: white;
+}
+
+
+
 
 /* \[:where(&)\]:size-4 {
     @apply size-4;
